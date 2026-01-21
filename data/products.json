@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Havuz Pompası - Model X100",
+    "category": "Motor ve Pompa",
+    "price": "15000",
+    "description": "Yüksek performanslı havuz pompası, 2HP güç",
+    "image": "/images/products/pompa.png"
+  },
+  {
+    "id": 2,
+    "name": "Kum Filtre Sistemi",
+    "category": "Filtre",
+    "price": "8500",
+    "description": "Profesyonel kum filtre, orta boy havuzlar için",
+    "image": "/images/products/filtre.png"
+  },
+  {
+    "id": 3,
+    "name": "Klor Tableti (25kg)",
+    "category": "Kimyasal",
+    "price": "1200",
+    "description": "Uzun ömürlü klor tabletleri, havuz dezenfeksiyonu",
+    "image": "/images/products/kimyasal.png"
+  },
+  {
+    "id": 4,
+    "name": "Havuz Robotu",
+    "category": "Aksesuar",
+    "price": "22000",
+    "description": "Otomatik havuz temizleme robotu",
+    "image": "/images/products/robot.png"
+  },
+  {
+    "id": 5,
+    "name": "Termometre",
+    "category": "Aksesuar",
+    "price": "500",
+    "description": "Havuzlarınızda sıcaklık ölçümü için kullanabilirsiniz",
+    "image": "/images/products/termometre.png"
+  }
+]
