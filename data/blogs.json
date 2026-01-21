@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "title": "Havuz Suyu Nasıl Berrak Tutulur?",
+        "content": "Havuz suyunun berraklığını korumak için düzenli bakım şarttır. İlk olarak, pH seviyesini 7.2-7.6 arasında tutmalısınız. Haftalık klor kontrolü yapın ve filtre sistemini günde en az 8 saat çalıştırın. Yüzeydeki yaprakları her gün temizleyin. Ayda bir kez şok klor uygulaması yaparak bakterileri yok edin.",
+        "author": "Poyraz Havuz Ekibi",
+        "date": "2026-01-15",
+        "image": "/images/blog/blog1.jpg"
+    },
+    {
+        "id": 2,
+        "title": "Kış Aylarında Havuz Bakımı",
+        "content": "Kış geldiğinde havuzunuzu doğru şekilde kapatmak önemlidir. Su seviyesini düşürün, kimyasal dengesi sağlayın ve özel kış örtüsü kullanın. Donma olaylarına karşı pompayı boşaltın. Hava sıcaklığı 10 derecenin altına düştüğünde ekipmanları donmadan koruyun. İlkbaharda açılış için profesyonel destek alın.",
+        "author": "Poyraz Havuz Ekibi",
+        "date": "2025-12-20",
+        "image": "/images/blog/blog2.jpg"
+    },
+    {
+        "id": 3,
+        "title": "Havuz Kimyasalları Kullanım Rehberi",
+        "content": "Doğru kimyasal kullanımı havuzunuzun ömrünü uzatır. Klor, pH düzenleyici, alkit ve algaecide temel kimyasallardır. Kimyasalları kesinlikle karıştırmayın. Her zaman üretici talimatlarını takip edin. Kimyasalları çocukların ulaşamayacağı, serin ve kuru yerde saklayın. Test kitleri ile düzenli ölçüm yapın.",
+        "author": "Poyraz Havuz Ekibi",
+        "date": "2026-01-10",
+        "image": "/images/blog/blog3.jpg"
+    },
+    {
+        "id": 4,
+        "title": "Yaz Sezonuna Havuzunuzu Hazırlayın",
+        "content": "Yaz yaklaşırken havuzunuzu hazırlamanın tam zamanı! Örtüyü kaldırın, suyu temizleyin ve kimyasal seviyelerini ayarlayın. Filtre ve pompa sistemini kontrol edin. Havuz tabanını ve duvarları fırçalayın. Su seviyesini tamamlayın ve ekipmanları test edin. İlk 24 saat filtre sistemini kesintisiz çalıştırın.",
+        "author": "Poyraz Havuz Ekibi",
+        "date": "2026-04-05",
+        "image": "/images/blog/blog4.jpg"
+    }
+]
