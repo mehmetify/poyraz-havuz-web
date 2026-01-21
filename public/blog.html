@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Poyraz Havuz</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">Poyraz Havuz</a>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Ana Sayfa</a></li>
+                <li><a href="/services.html" class="nav-link">Hizmetler</a></li>
+                <li><a href="/products.html" class="nav-link">Ürünler</a></li>
+                <li><a href="/blog.html" class="nav-link active">Blog</a></li>
+                <li><a href="/references.html" class="nav-link">Referanslar</a></li>
+                <li><a href="/contact.html" class="nav-link">İletişim</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1>Havuz Bakımı ve Öneriler</h1>
+    </header>
+
+    <div class="container">
+        <!-- Blog Ekleme/Düzenleme Formu -->
+        <section class="section">
+            <div class="card">
+                <h3 id="form-title" style="margin-bottom: 1.5rem; text-align: center;">✍️ Yeni Blog Yazısı Ekle</h3>
+                <form id="add-blog-form">
+                    <input type="hidden" id="blog-id">
+
+                    <div class="form-group">
+                        <label for="blog-title">Başlık</label>
+                        <input type="text" id="blog-title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="blog-content">İçerik</label>
+                        <textarea id="blog-content" rows="4" required></textarea>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label for="blog-author">Yazar</label>
+                            <input type="text" id="blog-author" value="Poyraz Havuz Ekibi" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="blog-image">Resim URL</label>
+                            <input type="text" id="blog-image" placeholder="/images/blog/blog1.jpg">
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button type="submit" class="btn-primary" id="submit-btn" style="flex: 1;">Blog Ekle</button>
+                        <button type="button" class="btn-delete" id="cancel-btn"
+                            style="display: none; background-color: #777;" onclick="resetForm()">İptal</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Blog Yazıları Listesi -->
+        <section class="section">
+            <h2 class="section-title">📚 Blog Yazıları</h2>
+            <div id="blog-list">
+                <p style="text-align: center;">Yükleniyor...</p>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 Poyraz Havuz - Öğrenci Projesi</p>
+    </footer>
+
+    <script src="/js/app.js"></script>
+    <script>
+        let allBlogs = [];
+
+        async function displayBlogs() {
+            allBlogs = await loadBlogs();
+            const blogList = document.getElementById('blog-list');
+
+            if (allBlogs.length === 0) {
+                blogList.innerHTML = '<p style="text-align: center; color: #999;">Henüz blog yazısı yok.</p>';
+                return;
+            }
+
+            allBlogs.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            blogList.innerHTML = allBlogs.map(blog => `
+                <div class="card" style="margin-bottom: 2rem; display: flex; flex-direction: column;">
+                    <img src="${blog.image}" alt="${blog.title}" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem;">
+                    <div style="padding: 0 1rem;">
+                        <h3 style="color: var(--primary-color); margin-bottom: 0.5rem; font-size: 1.8rem;">${blog.title}</h3>
+                        <p style="color: #999; font-size: 0.9rem; margin-bottom: 1rem; border-bottom: 1px solid #eee; padding-bottom: 1rem;">
+                            📅 ${new Date(blog.date).toLocaleDateString('tr-TR')} &nbsp;|&nbsp; ✍️ ${blog.author}
+                        </p>
+                        <p style="color: #555; line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">${blog.content}</p>
+                        <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                            <button class="btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;" onclick="editBlog(${blog.id})">Düzenle</button>
+                            <button class="btn-delete" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;" onclick="removeBlog(${blog.id})">Sil</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function editBlog(id) {
+            const blog = allBlogs.find(b => b.id === id);
+            if (!blog) return;
+
+            document.getElementById('blog-id').value = blog.id;
+            document.getElementById('blog-title').value = blog.title;
+            document.getElementById('blog-content').value = blog.content;
+            document.getElementById('blog-author').value = blog.author;
+            document.getElementById('blog-image').value = blog.image || '';
+
+            document.getElementById('form-title').innerText = '✏️ Blog Yazısını Düzenle';
+            document.getElementById('submit-btn').innerText = 'Güncelle';
+            document.getElementById('cancel-btn').style.display = 'inline-block';
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.getElementById('add-blog-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const id = document.getElementById('blog-id').value;
+            const blogData = {
+                title: document.getElementById('blog-title').value,
+                content: document.getElementById('blog-content').value,
+                author: document.getElementById('blog-author').value,
+                image: document.getElementById('blog-image').value || '/images/blog/blog1.jpg'
+            };
+
+            let result;
+            if (id) {
+                result = await updateBlog(id, blogData);
+                if (result) alert('✅ Blog yazısı güncellendi!');
+            } else {
+                result = await addBlog(blogData);
+                if (result) alert('✅ Blog yazısı eklendi!');
+            }
+
+            if (result) {
+                resetForm();
+                displayBlogs();
+            } else {
+                alert('❌ Hata oluştu!');
+            }
+        });
+
+        function resetForm() {
+            document.getElementById('add-blog-form').reset();
+            document.getElementById('blog-id').value = '';
+            document.getElementById('blog-author').value = 'Poyraz Havuz Ekibi';
+            document.getElementById('form-title').innerText = '✍️ Yeni Blog Yazısı Ekle';
+            document.getElementById('submit-btn').innerText = 'Blog Ekle';
+            document.getElementById('cancel-btn').style.display = 'none';
+        }
+
+        async function removeBlog(id) {
+            if (!confirm('Bu blog yazısını silmek istediğinizden emin misiniz?')) {
+                return;
+            }
+
+            const result = await deleteBlog(id);
+            if (result) {
+                alert('✅ Blog yazısı silindi!');
+                if (document.getElementById('blog-id').value == id) resetForm();
+                displayBlogs();
+            } else {
+                alert('❌ Hata oluştu!');
+            }
+        }
+
+        displayBlogs();
+    </script>
+</body>
+
+</html>
