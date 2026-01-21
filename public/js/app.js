@@ -1,5 +1,5 @@
-// API Adresi
-const API_URL = 'http://localhost:3000/api';
+// API Adresi (otomatik - hem localhost hem canlı sunucuda çalışır)
+const API_URL = window.location.origin + '/api';
 
 // Ürünleri yükle (READ işlemi)
 async function loadProducts() {
